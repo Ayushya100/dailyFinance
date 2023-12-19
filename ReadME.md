@@ -8,23 +8,28 @@ mongodb version - v5.0.8
 Packages Required for backend api's to be installed
 ---------------------------------------------------
 Run the following command in cmd:
-npm i axios
 npm i bcrypt
-npm i body-parser
 npm i cors
+npm i cookie-parser
+npm i cloudinary
 npm i dotenv
 npm i express
 npm i fs
 npm i jsonwebtoken
 npm i mongoose
+npm i mongoose-aggregate-paginate-v2
 npm i multer
 npm i nodemailer
 npm i nodemailer-express-handlebars
-npm i nodemon
 npm i node-cron
 npm i randombytes
 npm i uuid
 npm i validator
+
+Dev Dependencies
+-----------------
+npm i nodemon
+npm i prettier
 
 
 
