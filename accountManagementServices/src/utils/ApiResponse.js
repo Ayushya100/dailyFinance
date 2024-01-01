@@ -1,3 +1,5 @@
+"use strict";
+
 class ApiResponse {
     constructor(statusCode, data, message = 'SUCCESS') {
         this.statusCode = statusCode;
