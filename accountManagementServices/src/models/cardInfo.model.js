@@ -63,6 +63,6 @@ const cardInfoSchema = new mongoose.Schema(
 );
 
 // Card info Model
-const CardInfoModel = mongoose.Model('CardInfo', cardInfoSchema);
+const CardInfoModel = mongoose.model('CardInfo', cardInfoSchema);
 
 export default CardInfoModel;

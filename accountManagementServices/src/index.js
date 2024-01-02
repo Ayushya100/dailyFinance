@@ -1,14 +1,14 @@
 "use strict";
 
 import dotenv from "dotenv";
-import dbConnection from "./db/index.js";
+import db from "./db/index.js";
 import app from "./app.js";
 
 dotenv.config({
     path: './env'
 })
 
-dbConnection()
+db.dbConnection()
 .then(() => {
     const port = process.env.PORT || 4800;
     app.listen(port, () => {

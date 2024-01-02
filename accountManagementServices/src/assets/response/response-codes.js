@@ -1,6 +1,6 @@
 "use strict";
 
-const errorCodes = {
+const responseCodes = {
     PROCESSING: 102,
     REQUEST_OK: 200,
     REQUEST_COMPLETED: 201,
@@ -12,12 +12,13 @@ const errorCodes = {
     NOT_FOUND: 404,
     METHOD_NOT_ALLOWED: 405,
     REQUEST_TIMEOUT: 408,
+    CONFLICT: 409,
     INTERNAL_SERVER_ERROR: 500,
     BAD_GATEWAY: 502,
     GETWAY_TIMEOUT: 504
 };
 
-const errorMessage = {
+const responseMessage = {
     PROCESSING: 'Request under processing state.',
     REQUEST_OK: 'The request was successful.',
     REQUEST_COMPLETED: 'Request completed.',
@@ -29,9 +30,10 @@ const errorMessage = {
     NOT_FOUND: 'Not Found. Requested resource does not exist.',
     METHOD_NOT_ALLOWED: 'Method Not Allowed.',
     REQUEST_TIMEOUT: 'Request timeout.',
+    CONFLICT: 'The request could not be completed due to the conflict with the current state.',
     INTERNAL_SERVER_ERROR: 'An Internal Server Error occurred while processing the request.',
     BAD_GATEWAY: 'Bad Gateway. The server could not complete the request.',
     GETWAY_TIMEOUT: 'Gateway Timeout.'
 };
 
-export { errorCodes, errorMessage };
+export { responseCodes, responseMessage };
