@@ -184,6 +184,6 @@ const userDashboardSchema = new mongoose.Schema(
 );
 
 // User dashboard Model
-const UserDashboardModel = mongoose.Model('UserDashboard', userDashboardSchema);
+const UserDashboardModel = mongoose.model('UserDashboard', userDashboardSchema);
 
 export default UserDashboardModel;

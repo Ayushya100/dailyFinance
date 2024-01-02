@@ -60,6 +60,6 @@ const userFinanceSchema = new mongoose.Schema(
 );
 
 // User finance Model
-const UserFinanceModel = mongoose.Model('UserFinance', userFinanceSchema);
+const UserFinanceModel = mongoose.model('UserFinance', userFinanceSchema);
 
 export default UserFinanceModel;

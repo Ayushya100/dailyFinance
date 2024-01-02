@@ -3,6 +3,10 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { usersAPI } from "./constants.js";
+
+// Import Routes
+import userRoutes from './routes/user-routes/index.js';
 
 const app = express();
 
@@ -22,5 +26,8 @@ app.use(express.urlencoded({
 app.use(express.static("public"));
 
 app.use(cookieParser());
+
+// User Routes
+app.use(`${usersAPI}/createUser`, userRoutes.createUserAPI);
 
 export default app;

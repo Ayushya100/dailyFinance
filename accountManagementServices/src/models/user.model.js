@@ -3,6 +3,7 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import {v4 as uuidv4} from "uuid";
 import { SALT_ROUNDS } from "../constants.js";
 
 // Users Schema
@@ -144,6 +145,10 @@ userSchema.methods.generateRefreshToken = function() {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     );
+}
+
+userSchema.methods.generateVerificationCode = function() {
+    return uuidv4() + this._id;
 }
 
 // Create Users Model
