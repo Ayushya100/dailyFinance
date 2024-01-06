@@ -1,7 +1,6 @@
 "use strict";
 
 import express from "express";
-import { ApiError } from '../../utils/ApiError.js';
 import { ApiResponse } from '../../utils/ApiResponse.js';
 import { responseCodes, responseMessage } from "../../assets/response/response-codes.js";
 import userServices from "../../controllers/user-controllers/index.js";
