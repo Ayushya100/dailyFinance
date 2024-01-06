@@ -9,7 +9,7 @@ const checkUserExist = async(payload) => {
     let userName = payload.userName;
 
     const response = {
-        resType: 'REQUEST_OK',
+        resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
         isValid: true
     };
