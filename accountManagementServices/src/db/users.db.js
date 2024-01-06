@@ -149,6 +149,24 @@ const getUserInfoById = async(userId) => {
     return userInfo;
 }
 
+const updateUserDetails = async(userId, payload) => {
+    payload.modifiedOn = Date.now();
+    payload.modifiedBy = userId;
+
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {_id: userId},
+        {
+            $set: payload
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -isVerified -isDeleted -verificationCode -refreshToken -createdBy -modifiedBy'
+    );
+    return updatedUserInfo;
+};
+
 export {
     isUserAvailable,
     createNewUser,
@@ -159,5 +177,6 @@ export {
     generateVerificationCode,
     reactivateUser,
     generateAccessAndRefreshTokens,
-    getUserInfoById
+    getUserInfoById,
+    updateUserDetails
 };

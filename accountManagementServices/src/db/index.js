@@ -11,7 +11,8 @@ import {
     generateVerificationCode,
     reactivateUser,
     generateAccessAndRefreshTokens,
-    getUserInfoById
+    getUserInfoById,
+    updateUserDetails
 } from './users.db.js';
 
 export default {
@@ -25,5 +26,6 @@ export default {
     generateVerificationCode: generateVerificationCode,
     reactivateUser: reactivateUser,
     generateAccessAndRefreshTokens: generateAccessAndRefreshTokens,
-    getUserInfoById: getUserInfoById
+    getUserInfoById: getUserInfoById,
+    updateUserDetails: updateUserDetails
 };

@@ -19,7 +19,7 @@ router.get('/:id', verifyToken, async(req, res, next) => {
 
         if (getUserInfo.isValid) {
             res.status(responseCodes[getUserInfo.resType]).json(
-                new ApiResponse(responseCodes[getUserInfo.resType], getUserInfo.data, responseMessage[getUserInfo.resMsg])
+                new ApiResponse(responseCodes[getUserInfo.resType], getUserInfo.data, responseMessage[getUserInfo.resType])
             );
         } else {
             return next(getUserInfo);
