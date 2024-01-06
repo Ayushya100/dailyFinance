@@ -4,7 +4,7 @@ import express from "express";
 import { ApiError } from '../../utils/ApiError.js';
 import { ApiResponse } from '../../utils/ApiResponse.js';
 import { responseCodes, responseMessage } from "../../assets/response/response-codes.js";
-import userService from "../../controllers/user-routes/index.js";
+import userService from "../../controllers/user-controllers/index.js";
 
 const router = express.Router();
 

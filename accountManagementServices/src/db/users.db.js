@@ -21,6 +21,33 @@ const isUserByIdAvailable = async(userId) => {
     return isUserExist;
 }
 
+const isUserByEmailUsernameAvailable = async(userNameOrEmail) => {
+    const isUserExist = await User.findOne({
+        $or: [{userName: userNameOrEmail}, {emailId: userNameOrEmail}]
+    });
+
+    return isUserExist;
+}
+
+const generateVerificationCode = async(userId) => {
+    const user = await User.findById({_id: userId});
+    const verificationCode = user.generateVerificationCode();
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {_id: userId},
+        {
+            $set: {
+                verificationCode: verificationCode
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -loginCount -isDeleted -createdBy -modifiedBy'
+    );
+    return updatedUserInfo;
+}
+
 const createNewUser = async(payload) => {
     const newUser = await User.create({
         firstName: payload.firstName,
@@ -34,20 +61,7 @@ const createNewUser = async(payload) => {
     await UserDashboard.create({userId: newUser._id});
 
     // Create a verification code for new user registered and store it in db.
-    const verificationCode = newUser.generateVerificationCode();
-    const updatedUserInfo = await User.findByIdAndUpdate(
-        newUser._id,
-        {
-            $set: {
-                verificationCode: verificationCode
-            }
-        },
-        {
-            new: true
-        }
-    ).select(
-        '-password -loginCount -isDeleted -createdBy -modifiedBy'
-    );
+    const updatedUserInfo = await generateVerificationCode(newUser._id);
 
     // Return newly created user
     return updatedUserInfo;
@@ -76,9 +90,62 @@ const validateNewUser = async(userId) => {
     return updatedUserInfo;
 }
 
+const validateUserPassword = async(user, password) => {
+    const isPasswordValid = user.isPasswordCorrect(password);
+    return isPasswordValid;
+}
+
+const reactivateUser = async(userId) => {
+    const user = await User.findByIdAndUpdate(
+        {_id: userId},
+        {
+            $set: {
+                isDeleted: false,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -loginCount -isDeleted -createdBy -modifiedBy'
+    );
+
+    return user;
+}
+
+const generateAccessAndRefreshTokens = async(userId) => {
+    const user = await User.findById({_id: userId});
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {_id: userId},
+        {
+            $set: {
+                refreshToken: refreshToken,
+                loginCount: user.loginCount + 1,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    );
+
+    return {accessToken, refreshToken, userId, userName: updatedUserInfo.userName};
+}
+
 export {
     isUserAvailable,
     createNewUser,
     isUserByIdAvailable,
-    validateNewUser
+    validateNewUser,
+    isUserByEmailUsernameAvailable,
+    validateUserPassword,
+    generateVerificationCode,
+    reactivateUser,
+    generateAccessAndRefreshTokens
 };
