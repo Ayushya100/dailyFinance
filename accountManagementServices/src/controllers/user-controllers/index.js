@@ -4,6 +4,7 @@ import { validateNewUserPayload, validateUserLoginPayload } from "./validatePayl
 import { checkUserExist, createNewUser } from "./createUser.controller.js";
 import { checkUserById, verifyUser } from "./verifyUser.controller.js";
 import { isUserValid, isUserVerified, isUserActive, generateAccessAndRefreshTokens } from "./userLogin.controller.js";
+import { getUserInfoById } from "./getUserInfo.controller.js";
 
 export default {
     validateNewUserPayload: validateNewUserPayload,
@@ -15,5 +16,6 @@ export default {
     isUserValid: isUserValid,
     isUserVerified: isUserVerified,
     isUserActive: isUserActive,
-    generateAccessAndRefreshTokens: generateAccessAndRefreshTokens
+    generateAccessAndRefreshTokens: generateAccessAndRefreshTokens,
+    getUserInfoById: getUserInfoById
 };

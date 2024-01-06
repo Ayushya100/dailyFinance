@@ -126,6 +126,7 @@ const generateAccessAndRefreshTokens = async(userId) => {
             $set: {
                 refreshToken: refreshToken,
                 loginCount: user.loginCount + 1,
+                lastLogin: Date.now(),
                 modifiedOn: Date.now(),
                 modifiedBy: userId
             }
@@ -138,6 +139,16 @@ const generateAccessAndRefreshTokens = async(userId) => {
     return {accessToken, refreshToken, userId, userName: updatedUserInfo.userName};
 }
 
+const getUserInfoById = async(userId) => { 
+    const userInfo = await User.findOne({
+        _id: userId
+    }).select(
+        '-password -isVerified -isDeleted -verificationCode -refreshToken -createdBy -modifiedBy'
+    );
+
+    return userInfo;
+}
+
 export {
     isUserAvailable,
     createNewUser,
@@ -147,5 +158,6 @@ export {
     validateUserPassword,
     generateVerificationCode,
     reactivateUser,
-    generateAccessAndRefreshTokens
+    generateAccessAndRefreshTokens,
+    getUserInfoById
 };

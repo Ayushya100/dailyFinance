@@ -10,7 +10,7 @@ import { COOKIE_OPTIONS } from "../../constants.js";
 const router = express.Router();
 
 // API
-router.post('/', async(req, res) => {
+router.post('/', async(req, res, next) => {
     try {
         const payload = req.body;
 
@@ -44,24 +44,20 @@ router.post('/', async(req, res) => {
                         }, responseMessage[loggedInUser.resType])
                     );
                 } else {
-                    res.status(responseCodes[isUserVerified.resType]).json(
-                        new ApiError(responseCodes[isUserVerified.resType], responseMessage[isUserVerified.resType], isUserVerified.resType, isUserVerified.resMsg)
-                    );
+                    return next(isUserVerified);
                 }
             } else {
-                res.status(responseCodes[isUserValid.resType]).json(
-                    new ApiError(responseCodes[isUserValid.resType], responseMessage[isUserValid.resType], isUserValid.resType, isUserValid.resMsg)
-                );
+                return next(isUserValid);
             }
         } else {
-            res.status(responseCodes[isPayloadValid.resType]).json(
-                new ApiError(responseCodes[isPayloadValid.resType], responseMessage[isPayloadValid.resType], isPayloadValid.resType, isPayloadValid.resMsg)
-            );
+            return next(isPayloadValid);
         }
     } catch(err) {
-        res.status(responseCodes.INTERNAL_SERVER_ERROR).json(
-            new ApiError(responseCodes.INTERNAL_SERVER_ERROR, responseMessage.INTERNAL_SERVER_ERROR, 'INTERNAL_SERVER_ERROR', err)
-        );
+        next({
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            isValid: false
+        });
     }
 });
 

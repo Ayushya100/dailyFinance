@@ -7,6 +7,7 @@ import { usersAPI } from "./constants.js";
 
 // Import Routes
 import userRoutes from './routes/user-routes/index.js';
+import errorHandler from "./middlewares/errorHandler.middleware.js";
 
 const app = express();
 
@@ -31,5 +32,9 @@ app.use(cookieParser());
 app.use(`${usersAPI}/createUser`, userRoutes.createUserAPI);
 app.use(`${usersAPI}/verify`, userRoutes.verifyUserAPI);
 app.use(`${usersAPI}/userLogin`, userRoutes.userLoginAPI);
+app.use(`${usersAPI}/getUserInfo`, userRoutes.getUserInfoAPI);
+
+// Error handler middleware
+app.use(errorHandler);
 
 export default app;

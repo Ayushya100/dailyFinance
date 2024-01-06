@@ -9,7 +9,7 @@ import userServices from "../../controllers/user-controllers/index.js";
 const router = express.Router();
 
 // API
-router.post('/', async(req, res) => {
+router.post('/', async(req, res, next) => {
     try {
         const payload = req.body;
 
@@ -27,27 +27,23 @@ router.post('/', async(req, res) => {
 
                 if (isUserCreated.isValid) {
                     res.status(responseCodes[isUserCreated.resType]).json(
-                        new ApiResponse(responseCodes[isUserCreated.resType], isUserCreated.data, responseMessage[isUserCreated.resMsg])
+                        new ApiResponse(responseCodes[isUserCreated.resType], isUserCreated.data, responseMessage[isUserCreated.resType])
                     );
                 } else {
-                    res.status(responseCodes[isUserCreated.resType]).json(
-                        new ApiError(responseCodes[isUserCreated.resType], responseMessage[isUserCreated.resType], isUserCreated.resType, isUserCreated.resMsg)
-                    );
+                    return next(isUserCreated);
                 }
             } else {
-                res.status(responseCodes[isUserExist.resType]).json(
-                    new ApiError(responseCodes[isUserExist.resType], responseMessage[isUserExist.resType], isUserExist.resType, isUserExist.resMsg)
-                );
+                return next(isUserExist);
             }
         } else {
-            res.status(responseCodes[payloadValidationRes.resType]).json(
-                new ApiError(responseCodes[payloadValidationRes.resType], responseMessage[payloadValidationRes.resType], payloadValidationRes.resType, payloadValidationRes.resMsg)
-            );
+            return next(payloadValidationRes);
         }
     } catch(err) {
-        res.status(responseCodes.INTERNAL_SERVER_ERROR).json(
-            new ApiError(responseCodes.INTERNAL_SERVER_ERROR, responseMessage.INTERNAL_SERVER_ERROR, 'INTERNAL_SERVER_ERROR', err)
-        );
+        next({
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            isValid: false
+        });
     }
 });
 
