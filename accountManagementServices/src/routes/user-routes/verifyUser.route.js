@@ -9,7 +9,7 @@ import userService from "../../controllers/user-controllers/index.js";
 const router = express.Router();
 
 // API
-router.get('/:id/:time/:code', async(req, res) => {
+router.get('/:id/:time/:code', async(req, res, next) => {
     try {
         const userId = req.params.id;
         const requestTime = req.params.time;
@@ -31,19 +31,17 @@ router.get('/:id/:time/:code', async(req, res) => {
                     new ApiResponse(responseCodes[isUserValidated.resType], isUserValidated.data, responseMessage[isUserValidated.resType])
                 );
             } else {
-                res.status(responseCodes[isUserValidated.resType]).json(
-                    new ApiError(responseCodes[isUserValidated.resType],  responseMessage[isUserValidated.resType], isUserValidated.resType, isUserValidated.resMsg)
-                );
+                return next(isUserValidated);
             }
         } else {
-            res.status(responseCodes[isUserExist.resType]).json(
-                new ApiError(responseCodes[isUserExist.resType], responseMessage[isUserExist.resType], isUserExist.resType, isUserExist.resMsg)
-            );
+            return next(isUserExist);
         }
     } catch(err) {
-        res.status(responseCodes.INTERNAL_SERVER_ERROR).json(
-            new ApiError(responseCodes.INTERNAL_SERVER_ERROR, responseMessage.INTERNAL_SERVER_ERROR, 'INTERNAL_SERVER_ERROR', err)
-        );
+        next({
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            isValid: false
+        });
     } 
 });
 
