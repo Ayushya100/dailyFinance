@@ -2,7 +2,7 @@
 
 const responseCodes = {
     PROCESSING: 102,
-    REQUEST_OK: 200,
+    SUCCESS: 200,
     REQUEST_COMPLETED: 201,
     REQUEST_ACCEPTED: 202,
     CONTENT_NOT_AVAILABLE: 204,
@@ -20,7 +20,7 @@ const responseCodes = {
 
 const responseMessage = {
     PROCESSING: 'Request under processing state.',
-    REQUEST_OK: 'The request was successful.',
+    SUCCESS: 'The request was successful.',
     REQUEST_COMPLETED: 'Request completed.',
     REQUEST_ACCEPTED: 'Request accepted.',
     CONTENT_NOT_AVAILABLE: 'No content available.',

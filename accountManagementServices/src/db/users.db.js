@@ -12,6 +12,15 @@ const isUserAvailable = async(userName, emailId) => {
     return isUserExist;
 };
 
+const isUserByIdAvailable = async(userId) => {
+    const isUserExist = await User.findById({
+        _id : userId
+    }).select(
+        '-password -isDeleted -createdBy -modifiedBy'
+    )
+    return isUserExist;
+}
+
 const createNewUser = async(payload) => {
     const newUser = await User.create({
         firstName: payload.firstName,
@@ -44,7 +53,32 @@ const createNewUser = async(payload) => {
     return updatedUserInfo;
 }
 
+const validateNewUser = async(userId) => {
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {
+            _id: userId
+        }, {
+            $set: {
+                verificationCode: '',
+                isVerified: true,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -loginCount -isDeleted -createdBy -modifiedBy'
+    );
+
+    // Return newly created user
+    return updatedUserInfo;
+}
+
 export {
     isUserAvailable,
-    createNewUser
+    createNewUser,
+    isUserByIdAvailable,
+    validateNewUser
 };

@@ -29,5 +29,6 @@ app.use(cookieParser());
 
 // User Routes
 app.use(`${usersAPI}/createUser`, userRoutes.createUserAPI);
+app.use(`${usersAPI}/verify`, userRoutes.verifyUserAPI);
 
 export default app;

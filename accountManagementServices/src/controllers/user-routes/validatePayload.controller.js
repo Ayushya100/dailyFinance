@@ -3,7 +3,7 @@
 // Mandatory parameters to check - firstName, userName, emailId, & password
 const validateNewUserPayload = (payload) => {
     const response = {
-        resType: 'REQUEST_OK',
+        resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
         isValid: true
     };
