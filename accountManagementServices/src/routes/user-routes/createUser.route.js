@@ -4,7 +4,7 @@ import express from "express";
 import { ApiError } from '../../utils/ApiError.js';
 import { ApiResponse } from '../../utils/ApiResponse.js';
 import { responseCodes, responseMessage } from "../../assets/response/response-codes.js";
-import userServices from "../../controllers/user-routes/index.js";
+import userServices from "../../controllers/user-controllers/index.js";
 
 const router = express.Router();
 
@@ -27,7 +27,7 @@ router.post('/', async(req, res) => {
 
                 if (isUserCreated.isValid) {
                     res.status(responseCodes[isUserCreated.resType]).json(
-                        new ApiResponse(responseCodes[isUserCreated.resType], isUserCreated.data, responseCodes[isUserCreated.resMsg])
+                        new ApiResponse(responseCodes[isUserCreated.resType], isUserCreated.data, responseMessage[isUserCreated.resMsg])
                     );
                 } else {
                     res.status(responseCodes[isUserCreated.resType]).json(

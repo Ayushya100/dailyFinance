@@ -5,7 +5,12 @@ import {
     isUserAvailable,
     createNewUser,
     isUserByIdAvailable,
-    validateNewUser
+    validateNewUser,
+    isUserByEmailUsernameAvailable,
+    validateUserPassword,
+    generateVerificationCode,
+    reactivateUser,
+    generateAccessAndRefreshTokens
 } from './users.db.js';
 
 export default {
@@ -13,5 +18,10 @@ export default {
     isUserAvailable: isUserAvailable,
     createNewUser: createNewUser,
     isUserByIdAvailable: isUserByIdAvailable,
-    validateNewUser: validateNewUser
+    validateNewUser: validateNewUser,
+    isUserByEmailUsernameAvailable: isUserByEmailUsernameAvailable,
+    validateUserPassword: validateUserPassword,
+    generateVerificationCode: generateVerificationCode,
+    reactivateUser: reactivateUser,
+    generateAccessAndRefreshTokens: generateAccessAndRefreshTokens
 };

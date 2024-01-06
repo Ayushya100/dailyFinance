@@ -25,6 +25,24 @@ const validateNewUserPayload = (payload) => {
     return response;
 };
 
+// Mandatory parameters to check - userName/emailId(name) & password
+const validateUserLoginPayload = (payload) => {
+    const response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.userNameOrEmail || !payload.password) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required parameter is missing.';
+        response.isValid = false;
+    }
+
+    return response;
+}
+
 export {
-    validateNewUserPayload
+    validateNewUserPayload,
+    validateUserLoginPayload
 };
