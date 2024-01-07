@@ -42,7 +42,25 @@ const validateUserLoginPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameters to check - oldPassword & newPassword
+const validateChangePasswordPayload = (payload) => {
+    if (!payload.oldPassword || !payload.newPassword) {
+        return {
+            resType: 'BAD_REQUEST',
+            resMsg: 'REQUIRED PARAMETERS ARE MISSING',
+            isValid: false
+        };
+    }
+
+    return {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    }
+}
+
 export {
     validateNewUserPayload,
-    validateUserLoginPayload
+    validateUserLoginPayload,
+    validateChangePasswordPayload
 };

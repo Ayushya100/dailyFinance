@@ -167,6 +167,21 @@ const updateUserDetails = async(userId, payload) => {
     return updatedUserInfo;
 };
 
+const updateUserPassword = async(userId, payload) => {
+    const user = await User.findOne({
+        _id: userId
+    });
+
+    if (!(await user.isPasswordCorrect(payload.oldPassword))) {
+        return null;
+    }
+    user.password = payload.newPassword;
+    await user.save({validateBeforeSave: false});
+
+    const updatedUserInfo = await getUserInfoById(userId);
+    return updatedUserInfo;
+}
+
 export {
     isUserAvailable,
     createNewUser,
@@ -178,5 +193,6 @@ export {
     reactivateUser,
     generateAccessAndRefreshTokens,
     getUserInfoById,
-    updateUserDetails
+    updateUserDetails,
+    updateUserPassword
 };

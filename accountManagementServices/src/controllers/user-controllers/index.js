@@ -1,11 +1,12 @@
 "use strict";
 
-import { validateNewUserPayload, validateUserLoginPayload } from "./validatePayload.controller.js";
+import { validateNewUserPayload, validateUserLoginPayload, validateChangePasswordPayload } from "./validatePayload.controller.js";
 import { checkUserExist, createNewUser } from "./createUser.controller.js";
 import { checkUserById, verifyUser } from "./verifyUser.controller.js";
 import { isUserValid, isUserVerified, isUserActive, generateAccessAndRefreshTokens } from "./userLogin.controller.js";
 import { getUserInfoById } from "./getUserInfo.controller.js";
 import { updateUserDetails } from "./updateUser.controller.js";
+import { updateUserPassword } from "./updatePassword.controller.js";
 
 export default {
     validateNewUserPayload: validateNewUserPayload,
@@ -19,5 +20,7 @@ export default {
     isUserActive: isUserActive,
     generateAccessAndRefreshTokens: generateAccessAndRefreshTokens,
     getUserInfoById: getUserInfoById,
-    updateUserDetails: updateUserDetails
+    updateUserDetails: updateUserDetails,
+    validateChangePasswordPayload: validateChangePasswordPayload,
+    updateUserPassword: updateUserPassword
 };
