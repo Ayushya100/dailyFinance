@@ -176,9 +176,30 @@ const updateUserPassword = async(userId, payload) => {
         return null;
     }
     user.password = payload.newPassword;
+    user.modifiedBy = userId;
+    user.modifiedOn = Date.now();
     await user.save({validateBeforeSave: false});
 
     const updatedUserInfo = await getUserInfoById(userId);
+    return updatedUserInfo;
+}
+
+const updateUserProfileImage = async(userId, cloudinaryImageURL) => {
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {_id: userId},
+        {
+            $set: {
+                profileImageUrl: cloudinaryImageURL,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -isVerified -isDeleted -verificationCode -refreshToken -createdBy -modifiedBy'
+    );
     return updatedUserInfo;
 }
 
@@ -194,5 +215,6 @@ export {
     generateAccessAndRefreshTokens,
     getUserInfoById,
     updateUserDetails,
-    updateUserPassword
+    updateUserPassword,
+    updateUserProfileImage
 };
