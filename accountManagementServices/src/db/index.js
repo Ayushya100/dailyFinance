@@ -12,7 +12,8 @@ import {
     reactivateUser,
     generateAccessAndRefreshTokens,
     getUserInfoById,
-    updateUserDetails
+    updateUserDetails,
+    updateUserPassword
 } from './users.db.js';
 
 export default {
@@ -27,5 +28,6 @@ export default {
     reactivateUser: reactivateUser,
     generateAccessAndRefreshTokens: generateAccessAndRefreshTokens,
     getUserInfoById: getUserInfoById,
-    updateUserDetails: updateUserDetails
+    updateUserDetails: updateUserDetails,
+    updateUserPassword: updateUserPassword
 };
