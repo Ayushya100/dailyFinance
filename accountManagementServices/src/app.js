@@ -35,6 +35,7 @@ app.use(`${usersAPI}/userLogin`, userRoutes.userLoginAPI);
 app.use(`${usersAPI}/getUserInfo`, userRoutes.getUserInfoAPI);
 app.use(`${usersAPI}/updateUserDetails`, userRoutes.updateUserDetailsAPI);
 app.use(`${usersAPI}/updateUserPassword`, userRoutes.updateUserPasswordAPI);
+app.use(`${usersAPI}/updateProfileImage`, userRoutes.uploadProfileImageAPI);
 
 // Error handler middleware
 app.use(errorHandler);

@@ -13,7 +13,8 @@ import {
     generateAccessAndRefreshTokens,
     getUserInfoById,
     updateUserDetails,
-    updateUserPassword
+    updateUserPassword,
+    updateUserProfileImage
 } from './users.db.js';
 
 export default {
@@ -29,5 +30,6 @@ export default {
     generateAccessAndRefreshTokens: generateAccessAndRefreshTokens,
     getUserInfoById: getUserInfoById,
     updateUserDetails: updateUserDetails,
-    updateUserPassword: updateUserPassword
+    updateUserPassword: updateUserPassword,
+    updateUserProfileImage: updateUserProfileImage
 };

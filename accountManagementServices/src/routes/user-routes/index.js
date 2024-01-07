@@ -6,6 +6,7 @@ import userLogin from './userLogin.route.js';
 import getUserInfo from './getUserInfo.route.js';
 import updateUserDetails from './updateUserDetails.route.js';
 import updateUserPassword from './updateUserPassword.route.js';
+import uploadProfileImage from './uploadProfileImage.route.js';
 
 export default {
     createUserAPI: createUser,
@@ -13,5 +14,6 @@ export default {
     userLoginAPI: userLogin,
     getUserInfoAPI: getUserInfo,
     updateUserDetailsAPI: updateUserDetails,
-    updateUserPasswordAPI: updateUserPassword
+    updateUserPasswordAPI: updateUserPassword,
+    uploadProfileImageAPI: uploadProfileImage
 };

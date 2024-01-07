@@ -56,11 +56,28 @@ const validateChangePasswordPayload = (payload) => {
         resType: 'SUCCESS',
         resMsg: 'VALIDATION SUCCESSFULL',
         isValid: true
+    };
+}
+
+const validateNewProfileImagePayload = (profileImage) => {
+    if (!profileImage) {
+        return {
+            resType: 'BAD_REQUEST',
+            resMsg: 'REQUIRED PARAMETERS ARE MISSING',
+            isValid: false
+        };
     }
+
+    return {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
 }
 
 export {
     validateNewUserPayload,
     validateUserLoginPayload,
-    validateChangePasswordPayload
+    validateChangePasswordPayload,
+    validateNewProfileImagePayload
 };
