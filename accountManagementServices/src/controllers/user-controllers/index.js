@@ -8,6 +8,7 @@ import { getUserInfoById } from "./getUserInfo.controller.js";
 import { updateUserDetails } from "./updateUser.controller.js";
 import { updateUserPassword } from "./updatePassword.controller.js";
 import { updateProfileImage } from "./uploadProfileImage.controller.js";
+import { isTokenAvailable, refreshAccessToken } from "./refreshAccessToken.controller.js";
 
 export default {
     validateNewUserPayload: validateNewUserPayload,
@@ -25,5 +26,7 @@ export default {
     validateChangePasswordPayload: validateChangePasswordPayload,
     updateUserPassword: updateUserPassword,
     validateNewProfileImagePayload: validateNewProfileImagePayload,
-    updateProfileImage: updateProfileImage
+    updateProfileImage: updateProfileImage,
+    isTokenAvailable: isTokenAvailable,
+    refreshAccessToken: refreshAccessToken
 };

@@ -29,13 +29,14 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // User Routes
-app.use(`${usersAPI}/createUser`, userRoutes.createUserAPI);
+app.use(`${usersAPI}/create-user`, userRoutes.createUserAPI);
 app.use(`${usersAPI}/verify`, userRoutes.verifyUserAPI);
-app.use(`${usersAPI}/userLogin`, userRoutes.userLoginAPI);
-app.use(`${usersAPI}/getUserInfo`, userRoutes.getUserInfoAPI);
-app.use(`${usersAPI}/updateUserDetails`, userRoutes.updateUserDetailsAPI);
-app.use(`${usersAPI}/updateUserPassword`, userRoutes.updateUserPasswordAPI);
-app.use(`${usersAPI}/updateProfileImage`, userRoutes.uploadProfileImageAPI);
+app.use(`${usersAPI}/user-login`, userRoutes.userLoginAPI);
+app.use(`${usersAPI}/get-user-info`, userRoutes.getUserInfoAPI);
+app.use(`${usersAPI}/update-user-details`, userRoutes.updateUserDetailsAPI);
+app.use(`${usersAPI}/update-user-password`, userRoutes.updateUserPasswordAPI);
+app.use(`${usersAPI}/update-profile-image`, userRoutes.uploadProfileImageAPI);
+app.use(`${usersAPI}/refresh-token`, userRoutes.refreshAccessTokenAPI);
 
 // Error handler middleware
 app.use(errorHandler);
