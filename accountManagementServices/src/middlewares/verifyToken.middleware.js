@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
             });
         }
 
-        const decodedToken = jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY);
+        jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY);
         next();
     } catch(err) {
         next({
