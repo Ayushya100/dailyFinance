@@ -9,6 +9,7 @@ import { updateUserDetails } from "./updateUser.controller.js";
 import { updateUserPassword } from "./updatePassword.controller.js";
 import { updateProfileImage } from "./uploadProfileImage.controller.js";
 import { isTokenAvailable, refreshAccessToken } from "./refreshAccessToken.controller.js";
+import { deleteProfileImage } from "./deleteProfileImage.controller.js";
 
 export default {
     validateNewUserPayload: validateNewUserPayload,
@@ -28,5 +29,6 @@ export default {
     validateNewProfileImagePayload: validateNewProfileImagePayload,
     updateProfileImage: updateProfileImage,
     isTokenAvailable: isTokenAvailable,
-    refreshAccessToken: refreshAccessToken
+    refreshAccessToken: refreshAccessToken,
+    deleteProfileImage: deleteProfileImage
 };

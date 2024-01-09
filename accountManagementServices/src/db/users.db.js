@@ -19,7 +19,7 @@ const isUserByIdAvailable = async(userId) => {
         '-password -isDeleted -createdBy -modifiedBy'
     )
     return isUserExist;
-}
+};
 
 const isUserByEmailUsernameAvailable = async(userNameOrEmail) => {
     const isUserExist = await User.findOne({
@@ -27,7 +27,7 @@ const isUserByEmailUsernameAvailable = async(userNameOrEmail) => {
     });
 
     return isUserExist;
-}
+};
 
 const generateVerificationCode = async(userId) => {
     const user = await User.findById({_id: userId});
@@ -46,7 +46,7 @@ const generateVerificationCode = async(userId) => {
         '-password -loginCount -isDeleted -createdBy -modifiedBy'
     );
     return updatedUserInfo;
-}
+};
 
 const createNewUser = async(payload) => {
     const newUser = await User.create({
@@ -65,7 +65,7 @@ const createNewUser = async(payload) => {
 
     // Return newly created user
     return updatedUserInfo;
-}
+};
 
 const validateNewUser = async(userId) => {
     const updatedUserInfo = await User.findByIdAndUpdate(
@@ -88,7 +88,7 @@ const validateNewUser = async(userId) => {
 
     // Return newly created user
     return updatedUserInfo;
-}
+};
 
 const validateUserPassword = async(user, password) => {
     const isPasswordValid = user.isPasswordCorrect(password);
@@ -113,7 +113,7 @@ const reactivateUser = async(userId) => {
     );
 
     return user;
-}
+};
 
 const generateAccessAndRefreshTokens = async(userId) => {
     const user = await User.findById({_id: userId});
@@ -137,7 +137,7 @@ const generateAccessAndRefreshTokens = async(userId) => {
     );
 
     return {accessToken, refreshToken, userId, userName: updatedUserInfo.userName};
-}
+};
 
 const getUserInfoById = async(userId) => { 
     const userInfo = await User.findOne({
@@ -147,7 +147,7 @@ const getUserInfoById = async(userId) => {
     );
 
     return userInfo;
-}
+};
 
 const updateUserDetails = async(userId, payload) => {
     payload.modifiedOn = Date.now();
@@ -182,7 +182,7 @@ const updateUserPassword = async(userId, payload) => {
 
     const updatedUserInfo = await getUserInfoById(userId);
     return updatedUserInfo;
-}
+};
 
 const updateUserProfileImage = async(userId, cloudinaryImageURL) => {
     const updatedUserInfo = await User.findByIdAndUpdate(
@@ -190,6 +190,25 @@ const updateUserProfileImage = async(userId, cloudinaryImageURL) => {
         {
             $set: {
                 profileImageUrl: cloudinaryImageURL,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -isVerified -isDeleted -verificationCode -refreshToken -createdBy -modifiedBy'
+    );
+    return updatedUserInfo;
+};
+
+const deleteUserProfileImage = async(userId) => {
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {_id: userId},
+        {
+            $set: {
+                profileImageUrl: '',
                 modifiedOn: Date.now(),
                 modifiedBy: userId
             }
@@ -216,5 +235,6 @@ export {
     getUserInfoById,
     updateUserDetails,
     updateUserPassword,
-    updateUserProfileImage
+    updateUserProfileImage,
+    deleteUserProfileImage
 };

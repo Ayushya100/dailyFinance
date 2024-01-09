@@ -8,6 +8,7 @@ import updateUserDetails from "./updateUserDetails.route.js";
 import updateUserPassword from "./updateUserPassword.route.js";
 import uploadProfileImage from "./uploadProfileImage.route.js";
 import refreshAccessToken from "./refreshAccessToken.route.js";
+import deleteProfileImage from "./deleteProfileImage.route.js";
 
 export default {
     createUserAPI: createUser,
@@ -17,5 +18,6 @@ export default {
     updateUserDetailsAPI: updateUserDetails,
     updateUserPasswordAPI: updateUserPassword,
     uploadProfileImageAPI: uploadProfileImage,
-    refreshAccessTokenAPI: refreshAccessToken
+    refreshAccessTokenAPI: refreshAccessToken,
+    deleteProfileImageAPI: deleteProfileImage
 };
