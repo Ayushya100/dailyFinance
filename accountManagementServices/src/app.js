@@ -37,6 +37,7 @@ app.use(`${usersAPI}/update-user-details`, userRoutes.updateUserDetailsAPI);
 app.use(`${usersAPI}/update-user-password`, userRoutes.updateUserPasswordAPI);
 app.use(`${usersAPI}/update-profile-image`, userRoutes.uploadProfileImageAPI);
 app.use(`${usersAPI}/refresh-token`, userRoutes.refreshAccessTokenAPI);
+app.use(`${usersAPI}/delete-profile-image`, userRoutes.deleteProfileImageAPI);
 
 // Error handler middleware
 app.use(errorHandler);

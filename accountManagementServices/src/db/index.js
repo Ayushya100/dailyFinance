@@ -14,7 +14,8 @@ import {
     getUserInfoById,
     updateUserDetails,
     updateUserPassword,
-    updateUserProfileImage
+    updateUserProfileImage,
+    deleteUserProfileImage
 } from './users.db.js';
 
 export default {
@@ -31,5 +32,6 @@ export default {
     getUserInfoById: getUserInfoById,
     updateUserDetails: updateUserDetails,
     updateUserPassword: updateUserPassword,
-    updateUserProfileImage: updateUserProfileImage
+    updateUserProfileImage: updateUserProfileImage,
+    deleteUserProfileImage: deleteUserProfileImage
 };
